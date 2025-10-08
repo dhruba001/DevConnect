@@ -6,7 +6,7 @@ const app = express(); // creating a new server using express
 
 app.use("/normal", (req, res) => {
   res.send("Hello from the server 0");
-}); // this function is known as request handler
+}); // this function is known as request handler/ route handler
 
 app.use("/hello", (req, res) => {
   res.send("Hello there !!");
@@ -14,7 +14,7 @@ app.use("/hello", (req, res) => {
 
 app.use("/", (req, res) => {
   res.send("Main page");
-});
+}); // keep this at last else every route will go to /, so order is important here
 
 app.listen(7777, () => {
   console.log("server is sucessfully running on port 7777");
