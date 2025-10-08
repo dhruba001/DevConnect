@@ -2,7 +2,8 @@ const express = require("express");
 
 const app = express(); // creating a new server using express
 
-app.get("/user", (req, res) => {
+app.get("/user/:userId/:name/:password", (req, res) => {
+  console.log(req.params); // to see what data is coming to us from client
   res.send({ firstname: "Dhruba", lastname: "Goswami" });
 });
 
