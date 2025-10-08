@@ -1,0 +1,9 @@
+for routes and server get : 
+// we are listening to 2 routes in port 7777
+app.use("/hello", (req, res) => {
+  res.send("Hello there !!");
+}); this function is known as request handler/ route handler
+
+app.use("/", (req, res) => {
+  res.send("Main page");
+}); // keep this at last else every route will go to /, so order is important here

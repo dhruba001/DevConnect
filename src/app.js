@@ -2,19 +2,22 @@ const express = require("express");
 
 const app = express(); // creating a new server using express
 
-// we are listening to 3 routes in port 7777
-
-app.use("/normal", (req, res) => {
-  res.send("Hello from the server 0");
-}); // this function is known as request handler/ route handler
-
-app.use("/hello", (req, res) => {
-  res.send("Hello there !!");
+app.get("/user", (req, res) => {
+  res.send({ firstname: "Dhruba", lastname: "Goswami" });
 });
 
-app.use("/", (req, res) => {
-  res.send("Main page");
-}); // keep this at last else every route will go to /, so order is important here
+app.post("/user", (req, res) => {
+  res.send("data sucessfully saved to db");
+});
+
+app.delete("/user", (req, res) => {
+  res.send("data sucessfully deleted");
+});
+
+app.use("/test", (req, res) => {
+  // this will match all like get post put etc
+  res.send("Hello from the server");
+}); // this function is known as request handler/ route handler
 
 app.listen(7777, () => {
   console.log("server is sucessfully running on port 7777");
