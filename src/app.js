@@ -18,6 +18,7 @@ app.use("/test", (req, res, next) => {
 });
 
 app.use("/", (err, req, res, next) => {
+  // always keep this in end
   if (err) {
     res.status(500).send("we encountered an error");
   }
