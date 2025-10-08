@@ -1,0 +1,27 @@
+{
+  "name": "devconnect_backend",
+  "version": "1.0.0",
+  "description": "developers can connect ",
+  "keywords": [
+    "node.js",
+    "javascript"
+  ],
+  "homepage": "https://github.com/dhruba001/DevConnect#readme",
+  "bugs": {
+    "url": "https://github.com/dhruba001/DevConnect/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhruba001/DevConnect.git"
+  },
+  "license": "MIT",
+  "author": "Dhruba Goswami",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
