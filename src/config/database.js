@@ -3,7 +3,8 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URI);
+  const mongoURL = `${process.env.MONGO_URI}/devtinder`;
+  await mongoose.connect(mongoURL);
 };
 
 connectDB()
