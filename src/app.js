@@ -54,6 +54,18 @@ app.delete("/user", async (req, res) => {
   }
 });
 
+// patch an data entry [ update only specific field and keep rest of data same put will uapte the whole thing, so if you just send name it will remove everything and only put name there]
+app.patch("/user", async (req, res) => {
+  const userId = req.body.userId;
+  const data = req.body;
+  try {
+    await User.findByIdAndUpdate({ _id: userId }, data);
+    res.send("user Updated ");
+  } catch (err) {
+    res.status(400).send("error", err);
+  }
+});
+
 connectDB()
   .then(() => {
     console.log("MongoDB connected");
