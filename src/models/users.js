@@ -2,22 +2,36 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   firstName: {
-    type: "string",
+    type: String,
+    required: true, // now it is required else it'll throw error if not provided
   },
   lastName: {
-    type: "string",
+    type: String,
   },
   emailId: {
-    type: "string",
+    type: String,
+    required: true,
+    unique: true, // email id will be unique, no two data point can have same email
   },
   password: {
-    type: "string",
+    type: String,
+    required: true,
   },
   age: {
-    type: "string",
+    type: String,
   },
   gender: {
-    type: "string",
+    type: String,
+  },
+  photoUrl: {
+    type: String,
+  },
+  about: {
+    type: String,
+    default: "this is a default about of the user!",
+  },
+  skills: {
+    type: [String],
   },
 });
 

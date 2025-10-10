@@ -1,10 +1,11 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const { User } = require("./models/users");
-const app = express();
+const app = express(); // create server instance
 
 app.use(express.json());
 
+//new user sign up
 app.post("/signup", async (req, res) => {
   const user = new User(req.body);
   try {
@@ -42,7 +43,6 @@ app.get("/feed", async (req, res) => {
 });
 
 //delete user api
-
 app.delete("/user", async (req, res) => {
   const userId = req.body.userId;
   console.log(userId);
@@ -66,6 +66,7 @@ app.patch("/user", async (req, res) => {
   }
 });
 
+//connect db and then start listening
 connectDB()
   .then(() => {
     console.log("MongoDB connected");
