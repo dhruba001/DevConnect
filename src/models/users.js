@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema(
   {
@@ -16,6 +17,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true, // email id will be unique, no two data point can have same email
       trim: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error("invalid email address" + value);
+        }
+      },
     },
     password: {
       type: String,
