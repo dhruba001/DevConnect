@@ -55,16 +55,29 @@ app.delete("/user", async (req, res) => {
 });
 
 // patch an data entry [ update only specific field and keep rest of data same put will uapte the whole thing, so if you just send name it will remove everything and only put name there]
-app.patch("/user", async (req, res) => {
-  const userId = req.body.userId;
+app.patch("/user/:userId", async (req, res) => {
+  const userId = req.params?.userId;
   const data = req.body;
   try {
-    await User.findByIdAndUpdate({ _id: userId }, data, {
+    // only allowed updates fields can be updated others will be blocked
+    const ALLOWED_UPDATES = ["photoUrl", "about", "gender", "age", "skills"];
+
+    const isUpdateAllowed = Object.keys(data).every((k) => {
+      return ALLOWED_UPDATES.includes(k);
+    });
+
+    if (!isUpdateAllowed) {
+      throw new Error("Update not allowed !");
+    }
+    if (data.skills.length > 10) {
+      throw new Error("skills can't be more than 10");
+    }
+    await User.findByIdAndUpdate(userId, data, {
       runValidators: true, // check gender column in user.js
     });
     res.send("user Updated ");
   } catch (err) {
-    res.status(400).send("error", err);
+    res.status(400).send("error" + err);
   }
 });
 
