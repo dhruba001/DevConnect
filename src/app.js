@@ -12,7 +12,7 @@ app.post("/signup", async (req, res) => {
     await user.save();
     res.send("User added successfully");
   } catch (err) {
-    res.status(400).send("error :", err);
+    res.status(400).send("error :" + err);
   }
 });
 
@@ -28,7 +28,7 @@ app.get("/user", async (req, res) => {
       res.send(users);
     }
   } catch (err) {
-    res.status(400).send("something went wrong :", err);
+    res.status(400).send("something went wrong :" + err);
   }
 });
 
@@ -38,7 +38,7 @@ app.get("/feed", async (req, res) => {
     const users = await User.find({});
     res.send(users);
   } catch (err) {
-    res.status(400).send("error :", err);
+    res.status(400).send("error :" + err);
   }
 });
 
