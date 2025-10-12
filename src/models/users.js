@@ -45,7 +45,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       default:
         "https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png",
-      set: (v) => (v === "" ? undefined : v),
+      validate(value) {
+        if (!validator.isURL(value)) {
+          throw new Error("Invalid photo Url " + value);
+        }
+      },
     },
     about: {
       type: String,
