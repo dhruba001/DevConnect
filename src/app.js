@@ -2,6 +2,7 @@ const express = require("express");
 const { connectDB } = require("./config/database");
 const { User } = require("./models/users");
 const { validateSignUpData } = require("./utils/validation");
+const bcrypt = require("bcrypt");
 
 const app = express(); // create server instance
 
@@ -11,7 +12,16 @@ app.use(express.json());
 app.post("/signup", async (req, res) => {
   try {
     validateSignUpData(req); // validation of data, not schema level
-    const user = new User(req.body); // now make a new user entry in db
+
+    const { firstName, lastName, emailId, password } = req.body; // take values out of req.body
+    const passwordHash = await bcrypt.hash(password, 10); // hash the password by salt
+
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password: passwordHash,
+    }); // now make a new user entry in db
     await user.save();
     res.send("User added successfully");
   } catch (err) {
