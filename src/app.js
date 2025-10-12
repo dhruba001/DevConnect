@@ -1,18 +1,21 @@
 const express = require("express");
 const { connectDB } = require("./config/database");
 const { User } = require("./models/users");
+const { validateSignUpData } = require("./utils/validation");
+
 const app = express(); // create server instance
 
 app.use(express.json());
 
 //new user sign up
 app.post("/signup", async (req, res) => {
-  const user = new User(req.body);
   try {
+    validateSignUpData(req); // validation of data, not schema level
+    const user = new User(req.body); // now make a new user entry in db
     await user.save();
     res.send("User added successfully");
   } catch (err) {
-    res.status(400).send("error :" + err);
+    res.status(400).send("error :" + err.message);
   }
 });
 
